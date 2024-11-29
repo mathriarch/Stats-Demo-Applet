@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics Applet</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Dr. NSFW</h1>
+    </header>
+    </header>
+    <main>
+		<section id="controls">
+			<h2>Dataset Selection</h2>
+			<label for="dataset-selector">Choose a dataset:</label>
+			<select id="dataset-selector">
+				<option value="weights">Weights of Individuals</option>
+				<option value="house_prices">House Prices</option>
+				<option value="exam_scores">Exam Scores</option>
+				<option value="heights">Heights of Individuals</option>
+				<option value="salaries">Annual Salaries</option>
+				<option value="ages">Ages of People</option>
+				<option value="household_incomes">Household Incomes</option>
+				<option value="property_values">Property Values</option>
+				<option value="city_population_growth">City Population Growth</option>
+				<option value="company_profits">Company Profits</option>
+				<option value="rainfall_levels">Rainfall Levels</option>
+				<!-- New datasets -->
+				<option value="running_speeds">Running Speeds</option>
+				<option value="blood_pressure">Blood Pressure</option>
+				<option value="air_quality_index">Air Quality Index</option>
+				<option value="sales_figures">Retail Sales Figures</option>
+				<option value="reaction_times">Reaction Times</option>
+			</select>
+
+
+			<!-- Dataset Description Area -->
+			<div id="dataset-description" class="description-box">
+				<strong>Description:</strong> Select a dataset to see its description here.
+			</div>
+		</section>
+
+
+		<!-- Population Distribution -->
+		<section id="population-distribution">
+			<h2>Population Distribution</h2>
+			<canvas id="population-chart"></canvas>
+			<label for="population-color">Choose Graph Color:</label>
+			<input type="color" id="population-color" value="#4caf50">
+			<button id="apply-population-color">Apply Color</button>
+			<button id="export-population-chart">Export Population Graph (PNG)</button>
+
+			<!-- New Population Summary Section -->
+			<div id="population-summary" class="summary-box">
+				<h3>Population Summary Statistics</h3>
+				<!-- Summary statistics will be dynamically populated here -->
+			</div>
+		</section>
+
+		<section id="results">
+			<h2>Sample Statistics</h2>
+			<label for="sample-size-selector">Sample Size:</label>
+			<input type="number" id="sample-size-selector" value="30" min="1">
+			<button id="generate-sample">Generate Sample</button>
+
+			<!-- New Sample Summary Section -->
+			<div id="sample-output" class="summary-box">
+				<h3>Sample Summary Statistics</h3>
+				<!-- Summary statistics will be dynamically populated here -->
+			</div>
+		</section>
+
+		<section id="sampling-distribution">
+			<h2>Sampling Distribution</h2>
+			<label for="num-samples">Number of Samples:</label>
+			<input type="number" id="num-samples" value="100" min="1">
+			<label for="sample-size">Sample Size:</label>
+			<input type="number" id="sample-size" value="30" min="1">
+			<button id="generate-sampling-distribution">Generate Sampling Distribution</button>
+			<canvas id="sampling-chart"></canvas>
+			<label for="sampling-color">Choose Graph Color:</label>
+			<input type="color" id="sampling-color" value="#4caf50">
+			<button id="apply-sampling-color">Apply Color</button>
+			<button id="export-sampling-chart">Export Sampling Graph (PNG)</button>
+			<button id="export-data">Export Sampling Distribution Summary</button>
+
+			<!-- Sampling Summary Box -->
+			<div id="sampling-summary" class="summary-box">
+				<!-- Dynamically generated content will appear here -->
+			</div>
+		</section>
+
+
+	<section id="sampling-density-curve">
+    		<h2>Sampling Distribution Density Curve</h2>
+    		<canvas id="density-chart"></canvas>
+	</section>
+	
+
+	<section id="sampling-confidence-interval">
+   		 <h2>Sampling Distribution Confidence Interval</h2>
+   		 <label for="sampling-confidence-level">Confidence Level (%):</label>
+    		<input type="number" id="sampling-confidence-level" value="95" min="50" max="99">
+   		 <button id="calculate-sampling-ci">Calculate CI</button>
+   		 <canvas id="sampling-ci-chart"></canvas>
+   		 <div id="sampling-ci-output"></div>
+		<button id="export-ci-chart">Export Confidence Interval Graph (PNG)</button>
+	</section>
+
+		<section id="confidence-comparison">
+			<h2>Confidence Level Comparison</h2>
+			<label for="confidence-level-slider">Adjust Confidence Level (%):</label>
+			<input
+					type="range"
+					id="confidence-level-slider"
+					min="50"
+					max="99"
+					step="1"
+					value="95"
+			>
+			<span id="confidence-level-value">95%</span>
+			<canvas id="confidence-comparison-chart"></canvas>
+			<div id="confidence-comparison-output">
+				<p>Confidence Interval: <span id="confidence-interval">(--, --)</span></p>
+			</div>
+		</section>
+
+
+		<section id="hypothesis-testing">
+			<h2>Hypothesis Testing</h2>
+
+			<!-- Display Population Mean -->
+			<div id="population-mean-display">
+				<h3>Population Mean: <span id="population-mean-value">--</span></h3>
+			</div>
+
+			<!-- Null Hypothesis -->
+			<div class="form-group">
+				<label for="null-hypothesis">Null Hypothesis (H₀):</label>
+				<input type="text" id="null-hypothesis" placeholder="e.g., Mean = 70">
+			</div>
+
+			<!-- Alternative Hypothesis -->
+			<div class="form-group">
+				<label for="test-type">Alternative Hypothesis:</label>
+				<select id="test-type">
+					<option value="two-tailed">Population mean ≠ hypothesized mean</option>
+					<option value="one-tailed-lower">Population mean < hypothesized mean</option>
+					<option value="one-tailed-upper">Population mean > hypothesized mean</option>
+				</select>
+			</div>
+
+			<!-- Significance Level -->
+			<div class="form-group">
+				<label for="significance-level">Significance Level (α):</label>
+				<input type="number" id="significance-level" value="0.05" min="0.01" max="0.10" step="0.01">
+			</div>
+
+			<button id="run-hypothesis-test">Run Hypothesis Test</button>
+
+			<!-- Hypothesis Test Results -->
+			<div id="hypothesis-result"></div>
+
+			<canvas id="hypothesis-bell-curve"></canvas>
+			<button id="export-hypothesis-chart">Export Hypothesis Test Graph (PNG)</button>
+		</section>
+
+
+
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jstat/1.9.4/jstat.min.js"></script>
+
+
+
+    </main>
+    <footer>
+        <p>© 2024 Suck it SoC</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
